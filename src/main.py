@@ -7,6 +7,7 @@ from threescroll import ThreeScrollAttractor
 from rabinovichfabrikant import RabinovichFabrikantAttractor
 from halvorsen import HalvorsenAttractor
 from rossler import RosslerAttractor
+from dadras import DadrasAttractor
 
 from simulation import Simulation
 
@@ -22,11 +23,12 @@ def main():
     # attractor = ThreeScrollAttractor()
     #attractor = RabinovichFabrikantAttractor()
     #attractor = HalvorsenAttractor()
-    attractor = RosslerAttractor()
+    #attractor = RosslerAttractor()
+    attractor = DadrasAttractor()
 
     sim = Simulation(attractor)
 
-    initial_state = (10.0, 0.0, 10.0)  # Initial condition x, y, z
+    initial_state = (1.1, 2.1, -2.0)  # Initial condition x, y, z
     dt = 0.006
     steps = 200000
 
@@ -41,8 +43,8 @@ def main():
         cmap_name="hsv",
         line_width=1.0,
         rotate_camera=True,
-        rotation_speed_deg=2,
-        elevation_deg=10.0,
+        rotation_speed_deg=0.6,
+        elevation_deg=25.0,
         rotate_y=False,
         rotation_speed_y_deg=0.4,
     )
