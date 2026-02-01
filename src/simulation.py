@@ -25,7 +25,7 @@ class Simulation:
     def animate(
         self,
         states,
-        interval=30,
+        interval=3,
         steps_per_frame: int = 10,
         color_speed: float = 10.0,
         cmap_name: str = "hsv",
