@@ -5,6 +5,7 @@ from fourwings import FourWingsAttractor
 from sprott import SprottAttractor
 from threescroll import ThreeScrollAttractor
 from rabinovichfabrikant import RabinovichFabrikantAttractor
+from halvorsen import HalvorsenAttractor
 
 from simulation import Simulation
 
@@ -18,21 +19,22 @@ def main():
     # attractor = FourWingsAttractor()
     # attractor = SprottAttractor()
     # attractor = ThreeScrollAttractor()
-    attractor = RabinovichFabrikantAttractor()
+    #attractor = RabinovichFabrikantAttractor()
+    attractor = HalvorsenAttractor()
 
     sim = Simulation(attractor)
 
-    initial_state = (0.1, -0.1, 0.1)  # Initial condition x, y, z
+    initial_state = (-1.48, -1.51, 2.04)  # Initial condition x, y, z
     dt = 0.001
     steps = 200000
 
     states = sim.run(initial_state, dt, steps)
-    states = states[50000:]  # Discard initial transient
+    #states = states[50000:]  # Discard initial transient for rabinovich-fabrikant
 
     sim.animate(
         states,
-        interval=200,
-        steps_per_frame=3000,
+        interval=30,
+        steps_per_frame=300,
         color_speed=10.0,
         cmap_name="hsv",
         line_width=1.0,
