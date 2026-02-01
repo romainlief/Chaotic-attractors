@@ -65,7 +65,7 @@ class Simulation:
         # Initialize collection with colors and add to axes
         collection = Line3DCollection(segs_init, linewidth=line_width)
         init_count = segs_init.shape[0]
-        collection.set_color(colors_all[:init_count])
+        collection.set_color(colors_all[:init_count])  # type: ignore
         ax.add_collection3d(collection)
 
         def update(frame):
@@ -78,8 +78,8 @@ class Simulation:
                 # Keep a degenerate segment to maintain collection
                 p = segment[0] if segment.shape[0] == 1 else finite_states[0]
                 segs = np.array([[p, p]])
-                collection.set_segments(segs)
-                collection.set_color(cmap(np.array([0.0])))
+                collection.set_segments(segs)  # type: ignore
+                collection.set_color(cmap(np.array([0.0])))  # type: ignore
                 return (collection,)
 
             # Optionally rotate data around Y axis before drawing
@@ -94,13 +94,13 @@ class Simulation:
 
             # Build 3D line segments and color by time index
             segs = np.stack([segment[:-1], segment[1:]], axis=1)  # shape (n-1, 2, 3)
-            collection.set_segments(segs)
+            collection.set_segments(segs)  # type: ignore
             # Use precomputed colors so prior segments keep their color
-            collection.set_color(colors_all[: segs.shape[0]])
+            collection.set_color(colors_all[: segs.shape[0]])  # type: ignore
             # Optionally rotate camera around the scene
             if rotate_camera:
                 azim = (frame * rotation_speed_deg) % 360.0
-                ax.view_init(elev=elevation_deg, azim=azim, vertical_axis="z")
+                ax.view_init(elev=elevation_deg, azim=azim, vertical_axis="x")
             return (collection,)
 
         total_frames = max(1, int(np.ceil(len(states) / steps_per_frame)))

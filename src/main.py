@@ -2,6 +2,8 @@ from chen import ChenAttractor
 from chua import ChuaAttractor
 from chenlee import ChenLeeAttractor
 from fourwings import FourWingsAttractor
+from sprott import SprottAttractor
+
 from simulation import Simulation
 
 
@@ -9,12 +11,13 @@ def main():
     # attractor = ChenAttractor()
     # attractor = ChuaAttractor()
     # attractor = ChenLeeAttractor()
-    attractor = FourWingsAttractor()
+    #attractor = FourWingsAttractor()
+    attractor = SprottAttractor()
 
     sim = Simulation(attractor)
 
-    initial_state = (1.3, -0.18, 0.01)  # Initial condition x, y, z
-    dt = 0.09
+    initial_state = (0.63, 0.47, -0.54)  # Initial condition x, y, z
+    dt = 0.03
     steps = 100000
 
     states = sim.run(initial_state, dt, steps)
@@ -27,10 +30,10 @@ def main():
         cmap_name="hsv",
         line_width=1.0,
         rotate_camera=True,
-        rotation_speed_deg=0.8,
-        elevation_deg=25.0,
-        rotate_y=True,
-        rotation_speed_y_deg=0.7,
+        rotation_speed_deg=0.4,
+        elevation_deg=225.0,
+        rotate_y=False,
+        rotation_speed_y_deg=0.4,
     )
 
 
