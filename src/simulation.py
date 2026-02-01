@@ -6,36 +6,47 @@ from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import matplotlib.cm as cm
 import matplotlib.colors as colors
 
+
 class Simulation:
     def __init__(self, attractor) -> None:
         self.attractor = attractor
         plt.style.use("dark_background")
-        
+
     def run(self, initial_state, dt, steps):
         states = np.zeros((steps, 3))
         states[0] = initial_state
         for i in range(1, steps):
             prev = tuple(states[i - 1])
-            
+
             new_state = self.attractor.update(prev, dt)
             states[i] = new_state
         return states
-    
-    def animate(self, states, interval=30, steps_per_frame: int = 10,
+
+    def animate(
+        self,
+        states,
+        interval=30,
+        steps_per_frame: int = 10,
         color_speed: float = 10.0,
         cmap_name: str = "hsv",
-        line_width: float = 1.0,):
-        
+        line_width: float = 1.0,
+        rotate_camera: bool = False,
+        rotation_speed_deg: float = 0.6,
+        elevation_deg: float = 30.0,
+        rotate_y: bool = False,
+        rotation_speed_y_deg: float = 0.6,
+    ):
+
         fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
+        ax = fig.add_subplot(111, projection="3d")
         ax.set_axis_off()
-        
+
         cmap = cm.get_cmap(cmap_name)
         finite_mask = np.all(np.isfinite(states), axis=1)
         finite_states = states[finite_mask]
         if finite_states.size == 0:
             finite_states = states[np.newaxis, 0]
-        
+
         ax.set_xlim(left=(np.min(finite_states[:, 0]), np.max(finite_states[:, 0])))
         ax.set_ylim((np.min(finite_states[:, 1]), np.max(finite_states[:, 1])))
         ax.set_zlim((np.min(finite_states[:, 2]), np.max(finite_states[:, 2])))
@@ -56,7 +67,7 @@ class Simulation:
         init_count = segs_init.shape[0]
         collection.set_color(colors_all[:init_count])
         ax.add_collection3d(collection)
-        
+
         def update(frame):
             end_idx = min((frame + 1) * steps_per_frame, len(states))
             segment = states[:end_idx]
@@ -71,11 +82,25 @@ class Simulation:
                 collection.set_color(cmap(np.array([0.0])))
                 return (collection,)
 
+            # Optionally rotate data around Y axis before drawing
+            if rotate_y:
+                theta_y = np.deg2rad(frame * rotation_speed_y_deg)
+                c, s = np.cos(theta_y), np.sin(theta_y)
+                # Rotate points around Y: x' = c*x + s*z, y' = y, z' = -s*x + c*z
+                x_rot = c * segment[:, 0] + s * segment[:, 2]
+                y_rot = segment[:, 1]
+                z_rot = -s * segment[:, 0] + c * segment[:, 2]
+                segment = np.stack([x_rot, y_rot, z_rot], axis=1)
+
             # Build 3D line segments and color by time index
             segs = np.stack([segment[:-1], segment[1:]], axis=1)  # shape (n-1, 2, 3)
             collection.set_segments(segs)
             # Use precomputed colors so prior segments keep their color
             collection.set_color(colors_all[: segs.shape[0]])
+            # Optionally rotate camera around the scene
+            if rotate_camera:
+                azim = (frame * rotation_speed_deg) % 360.0
+                ax.view_init(elev=elevation_deg, azim=azim, vertical_axis="z")
             return (collection,)
 
         total_frames = max(1, int(np.ceil(len(states) / steps_per_frame)))
