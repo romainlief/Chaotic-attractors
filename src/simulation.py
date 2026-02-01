@@ -25,7 +25,7 @@ class Simulation:
     def animate(
         self,
         states,
-        interval=3,
+        interval=30,
         steps_per_frame: int = 10,
         color_speed: float = 10.0,
         cmap_name: str = "hsv",
@@ -100,7 +100,7 @@ class Simulation:
             # Optionally rotate camera around the scene
             if rotate_camera:
                 azim = (frame * rotation_speed_deg) % 360.0
-                ax.view_init(elev=elevation_deg, azim=azim, vertical_axis="z")
+                ax.view_init(elev=elevation_deg, azim=azim, vertical_axis="y")
             return (collection,)
 
         total_frames = max(1, int(np.ceil(len(states) / steps_per_frame)))
