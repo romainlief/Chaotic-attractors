@@ -100,7 +100,7 @@ class Simulation:
             # Optionally rotate camera around the scene
             if rotate_camera:
                 azim = (frame * rotation_speed_deg) % 360.0
-                ax.view_init(elev=elevation_deg, azim=azim, vertical_axis="x")
+                ax.view_init(elev=elevation_deg, azim=azim, vertical_axis="z")
             return (collection,)
 
         total_frames = max(1, int(np.ceil(len(states) / steps_per_frame)))
