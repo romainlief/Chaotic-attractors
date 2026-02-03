@@ -12,6 +12,7 @@ from langford import LangfordAttractor
 from thomas import ThomasAttractor
 from arneodo import ArneodoAttractor
 from sprottB import SprottBAttractor
+from sprottlinzf import SprottLinzFAttractor
 from simulation import Simulation
 
 
@@ -30,12 +31,13 @@ def main():
         # attractor = LangfordAttractor()
         # attractor = ThomasAttractor()
         # attractor = ArneodoAttractor()
-        attractor = SprottBAttractor()
+        # attractor = SprottBAttractor()
+        attractor = SprottLinzFAttractor()
 
         sim = Simulation(attractor)
 
         initial_state = (0.1, 0, 0)  # Initial condition x, y, z
-        dt = 0.012
+        dt = 0.03
         steps = 300_000
 
         states = sim.run(initial_state, dt, steps)
@@ -50,7 +52,7 @@ def main():
             line_width=1.0,
             rotate_camera=True,
             rotation_speed_deg=0.6,
-            elevation_deg=5.0,
+            elevation_deg=55.0,
             rotate_y=False,
             rotation_speed_y_deg=0.4,
         )
