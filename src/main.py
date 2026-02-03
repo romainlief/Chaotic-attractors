@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    # attractor = ChenAttractor()
+    attractor = ChenAttractor()
     # attractor = ChuaAttractor()
     # attractor = ChenLeeAttractor()
     # attractor = FourWingsAttractor()
@@ -29,7 +29,7 @@ def main():
     # attractor = RosslerAttractor()
     # attractor = DadrasAttractor()
     # attractor = LangfordAttractor()
-    attractor = ThomasAttractor()
+    #attractor = ThomasAttractor()
 
     sim = Simulation(attractor)
 
