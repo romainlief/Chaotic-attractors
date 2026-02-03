@@ -11,6 +11,7 @@ from dadras import DadrasAttractor
 from langford import LangfordAttractor
 from thomas import ThomasAttractor
 from arneodo import ArneodoAttractor
+from sprottB import SprottBAttractor
 from simulation import Simulation
 
 
@@ -28,12 +29,13 @@ def main():
         # attractor = DadrasAttractor()
         # attractor = LangfordAttractor()
         # attractor = ThomasAttractor()
-        attractor = ArneodoAttractor()
+        # attractor = ArneodoAttractor()
+        attractor = SprottBAttractor()
 
         sim = Simulation(attractor)
 
-        initial_state = (1.0, 1.0, 0.0)  # Initial condition x, y, z
-        dt = 0.006
+        initial_state = (0.1, 0, 0)  # Initial condition x, y, z
+        dt = 0.012
         steps = 300_000
 
         states = sim.run(initial_state, dt, steps)
@@ -42,12 +44,12 @@ def main():
         sim.animate(
             states,
             interval=30,
-            steps_per_frame=200,
+            steps_per_frame=60,
             color_speed=10.0,
             cmap_name="hsv",
             line_width=1.0,
             rotate_camera=True,
-            rotation_speed_deg=1.5,
+            rotation_speed_deg=0.6,
             elevation_deg=5.0,
             rotate_y=False,
             rotation_speed_y_deg=0.4,
