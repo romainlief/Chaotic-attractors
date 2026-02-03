@@ -5,6 +5,7 @@ from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import matplotlib.cm as cm
 import matplotlib.colors as colors
+from scipy.integrate import solve_ivp
 
 
 class Simulation:
@@ -13,14 +14,33 @@ class Simulation:
         plt.style.use("dark_background")
 
     def run(self, initial_state, dt, steps):
-        states = np.zeros((steps, 3))
-        states[0] = initial_state
-        for i in range(1, steps):
-            prev = tuple(states[i - 1])
+        # If the attractor is a discrete map, perform direct iteration
+        if getattr(self.attractor, "is_discrete", False):
+            states = np.zeros((steps, 3))
+            states[0] = initial_state
+            for i in range(1, steps):
+                prev = tuple(states[i - 1])
+                new_state = self.attractor.update(prev, dt)
+                states[i] = new_state
+            return states
 
-            new_state = self.attractor.update(prev, dt)
-            states[i] = new_state
-        return states
+        # Otherwise, use SciPy's RK45 integrator (solve_ivp) for ODEs
+        t_eval = np.linspace(0.0, dt * (steps - 1), steps)
+
+        def f(t, y):
+            dx, dy, dz = self.attractor.derivatives(y)
+            return [dx, dy, dz]
+
+        sol = solve_ivp(
+            f,
+            (t_eval[0], t_eval[-1]),
+            initial_state,
+            method="RK45",
+            t_eval=t_eval,
+            rtol=1e-9,
+            atol=1e-12,
+        )
+        return sol.y.T
 
     def animate(
         self,

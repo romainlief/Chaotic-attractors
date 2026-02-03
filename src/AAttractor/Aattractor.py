@@ -2,6 +2,10 @@ from abc import ABC, abstractmethod
 
 
 class AAttractor(ABC):
+    def __init__(self) -> None:
+        # By default, attractors are continuous-time ODEs.
+        # Discrete maps should set this to True in their __init__.
+        self.is_discrete = True
 
     @abstractmethod
     def derivatives(self, state) -> tuple[float, float, float]:
