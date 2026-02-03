@@ -10,15 +10,11 @@ from rossler import RosslerAttractor
 from dadras import DadrasAttractor
 from langford import LangfordAttractor
 from thomas import ThomasAttractor
-
 from simulation import Simulation
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 def main():
-    attractor = ChenAttractor()
+    # attractor = ChenAttractor()
     # attractor = ChuaAttractor()
     # attractor = ChenLeeAttractor()
     # attractor = FourWingsAttractor()
@@ -29,7 +25,7 @@ def main():
     # attractor = RosslerAttractor()
     # attractor = DadrasAttractor()
     # attractor = LangfordAttractor()
-    #attractor = ThomasAttractor()
+    attractor = ThomasAttractor()
 
     sim = Simulation(attractor)
 
