@@ -13,7 +13,7 @@ from Attractor.thomas import ThomasAttractor
 from Attractor.arneodo import ArneodoAttractor
 from Attractor.sprottB import SprottBAttractor
 from Attractor.sprottlinzf import SprottLinzFAttractor
-from simulation import Simulation
+from launcher.simulation import Simulation
 
 
 def main():
