@@ -1,18 +1,4 @@
-from Attractor.chen import ChenAttractor
-from Attractor.chua import ChuaAttractor
-from Attractor.chenlee import ChenLeeAttractor
-from Attractor.fourwings import FourWingsAttractor
-from Attractor.sprott import SprottAttractor
-from Attractor.threescroll import ThreeScrollAttractor
-from Attractor.rabinovichfabrikant import RabinovichFabrikantAttractor
-from Attractor.halvorsen import HalvorsenAttractor
-from Attractor.rossler import RosslerAttractor
-from Attractor.dadras import DadrasAttractor
-from Attractor.langford import LangfordAttractor
-from Attractor.thomas import ThomasAttractor
-from Attractor.arneodo import ArneodoAttractor
-from Attractor.sprottB import SprottBAttractor
-from Attractor.sprottlinzf import SprottLinzFAttractor
+from Attractor import *
 from launcher.simulation import Simulation
 
 
