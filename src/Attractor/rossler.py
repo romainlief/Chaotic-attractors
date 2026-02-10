@@ -1,4 +1,4 @@
-from AAttractor.Aattractor import AAttractor
+from Attractor.AAttractor.Aattractor import AAttractor
 
 
 class RosslerAttractor(AAttractor):

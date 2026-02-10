@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from chen import ChenAttractor
+from Attractor.chen import ChenAttractor
 import numpy as np
 from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d.art3d import Line3DCollection

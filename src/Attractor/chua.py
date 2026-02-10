@@ -1,5 +1,5 @@
 from math import sin, pi
-from AAttractor.Aattractor import AAttractor
+from Attractor.AAttractor.Aattractor import AAttractor
 
 
 class ChuaAttractor(AAttractor):

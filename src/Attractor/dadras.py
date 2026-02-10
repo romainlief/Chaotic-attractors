@@ -1,4 +1,4 @@
-from AAttractor.Aattractor import AAttractor
+from Attractor.AAttractor.Aattractor import AAttractor
 
 class DadrasAttractor(AAttractor):
     def __init__(self) -> None:

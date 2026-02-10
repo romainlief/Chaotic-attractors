@@ -1,5 +1,5 @@
 import numpy as np
-from AAttractor.Aattractor import AAttractor
+from Attractor.AAttractor.Aattractor import AAttractor
 
 
 class ThomasAttractor(AAttractor):
