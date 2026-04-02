@@ -1,5 +1,5 @@
 from Attractor import *
-from launcher.simulation import Simulation
+from Attractor.launcher.simulation import Simulation
 
 
 def main():
